@@ -27,7 +27,7 @@ glass_tbl<-read_csv("https://www4.stat.ncsu.edu/online/datasets/glass.data",
                     col_names=c("Id","RI","Na","Mg","Al","Si","K","Ca","Ba","Fe","Type_of_glass"))
 
 #Printing result
-datatable(glass_tbl)
+glass_tbl
 ```
 
 
@@ -82,7 +82,7 @@ yeast_tbl<-read_fwf("https://www4.stat.ncsu.edu/online/datasets/yeast.data",
                                col_names=c("seq_name","mcg","gvh","alm","mit","erl","pox","vac","nuc","class")))
 
 #Printing resultant tibble
-datatable(yeast_tbl)
+yeast_tbl
 ```
 
 ### 2. 

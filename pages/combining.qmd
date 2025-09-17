@@ -25,7 +25,7 @@ Let's  read in the first sheet of the file, which I have downloaded locally.
 white_wine_tbl<-read_excel("../white-wine.xlsx", sheet=excel_sheets("../white-wine.xlsx")[1])
 
 #Printing new tibble
-datatable(white_wine_tbl)
+white_wine_tbl
 ```
 
 
@@ -62,7 +62,7 @@ Next, we will repeat this process for the red wine dataset, with the slight cave
 red_wine_tbl<-read_delim("https://www4.stat.ncsu.edu/~online/datasets/red-wine.csv",delim=";")
 
 #Printing data to check that it read in correctly
-datatable(red_wine_tbl)
+red_wine_tbl
 
 #Assigning clean column names
 colnames(red_wine_tbl)<-white_wine_colnames$Variables
