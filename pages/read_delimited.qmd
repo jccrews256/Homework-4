@@ -6,6 +6,8 @@ editor_options:
   chunk_output_type: inline
 ---
 
+For this task, we will be reading in and manipulating delimited data. 
+
 First, we need to add in our packages.
 
 ```{r}
@@ -23,7 +25,7 @@ First, we will read in the file using `read_csv` as this is a comma-delimited fi
 glass_tbl<-read_csv("https://www4.stat.ncsu.edu/online/datasets/glass.data",col_names=c("Id","RI","Na","Mg","Al","Si","K","Ca","Ba","Fe","Type_of_glass"))
 
 #Printing result
-glass_tbl
+print(glass_tbl,n=30)
 ```
 
 
@@ -39,7 +41,8 @@ glass_tbl |>
                             ifelse(Type_of_glass==4,"vehicle_windows_non_float_processed",
                               ifelse(Type_of_glass==5,"containers",
                                 ifelse(Type_of_glass==6,"tableware",
-                                  ifelse(Type_of_glass==7,"headlamps","error"))))))))
+                                  ifelse(Type_of_glass==7,"headlamps","error")))))))) |>
+  print(n=30)
 ```
 
 ### 3. 
@@ -56,7 +59,8 @@ glass_tbl |>
                               ifelse(Type_of_glass==5,"containers",
                                 ifelse(Type_of_glass==6,"tableware",
                                   ifelse(Type_of_glass==7,"headlamps","error")))))))) |>
-  filter(Fe< 0.2, Type_of_glass %in% c("tableware","headlamps"))
+  filter(Fe< 0.2, Type_of_glass %in% c("tableware","headlamps")) |>
+  print(n=30)
 ```
 
 
@@ -71,10 +75,12 @@ First, we will read in these fixed-width data.
 
 ```{r}
 #Reading in data file
-yeast_tbl<-read_fwf("https://www4.stat.ncsu.edu/online/datasets/yeast.data",fwf_widths(c(12,6,6,6,6,6,6,6,6,3),col_names=c("seq_name","mcg","gvh","alm","mit","erl","pox","vac","nuc","class")))
+yeast_tbl<-read_fwf("https://www4.stat.ncsu.edu/online/datasets/yeast.data",
+                    fwf_widths(c(12,6,6,6,6,6,6,6,6,3),
+                               col_names=c("seq_name","mcg","gvh","alm","mit","erl","pox","vac","nuc","class")))
 
 #Printing resultant tibble
-print(yeast_tbl)
+print(yeast_tbl,n=30)
 ```
 
 ### 2. 
@@ -84,7 +90,8 @@ Next, we will create a chain that removes the seq_name and nuc variables.
 ```{r}
 #Removing seq_name and nuc
 yeast_tbl |> 
-  select(-seq_name,-nuc)
+  select(-seq_name,-nuc) |>
+  print(n=30)
 ```
 
 ### 3.
@@ -97,6 +104,7 @@ Finally, we will continue the chain and create columns containing means and medi
 yeast_tbl |> 
   select(-seq_name,-nuc) |>
   group_by(class) |>
-  mutate(across(where(is.numeric),list(mean=mean,median=median),.names="{.fn}_{.col}"))
+  mutate(across(where(is.numeric),list(mean=mean,median=median),.names="{.fn}_{.col}")) |>
+  print(n=30)
 ```
 

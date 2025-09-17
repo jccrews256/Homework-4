@@ -6,32 +6,36 @@ editor_options:
   chunk_output_type: inline
 ---
 
+For this task, we will manipulate and combine two wine datasets. 
+
+First, we need to load our packages. 
+
 ```{r}
 library(tidyverse)
 library(readxl)
 library(readr)
 ```
 
-
-For this task, we will manipulate and combine two wine datasets. 
-
 ### 1. 
-First, I will read in the first sheet of the file, which I have downloaded locally. 
+Let's  read in the first sheet of the file, which I have downloaded locally. 
 
 ```{r}
 #Reading in the data
 white_wine_tbl<-read_excel("../white-wine.xlsx", sheet=excel_sheets("../white-wine.xlsx")[1])
 
 #Printing new tibble
-white_wine_tbl
+print(white_wine_tbl,n=30)
 ```
 
 
 ### 2. 
 Next, we will grab the clean variable names in the second sheet of the file and replace our original tibble column names with those. 
 ```{r}
-white_wine_colnames<-read_excel("../white-wine.xlsx", sheet=excel_sheets("../white-wine.xlsx")[2])
+#Reading in column names
+white_wine_colnames<-read_excel("../white-wine.xlsx", 
+                                sheet=excel_sheets("../white-wine.xlsx")[2])
 
+#Assigning column names
 colnames(white_wine_tbl)<-white_wine_colnames$Variables
 ```
 
@@ -44,7 +48,7 @@ Before moving to the red wine dataset, we will add a variable indicating that th
 white_wine_tbl$type="white"
 
 #Printing updated tibble
-white_wine_tbl
+print(white_wine_tbl,n=30)
 ```
 
 
@@ -57,7 +61,7 @@ Next, we will repeat this process for the red wine dataset, with the slight cave
 red_wine_tbl<-read_delim("https://www4.stat.ncsu.edu/~online/datasets/red-wine.csv",delim=";")
 
 #Printing data to check that it read in correctly
-red_wine_tbl
+print(red_wine_tbl,n=30)
 
 #Assigning clean column names
 colnames(red_wine_tbl)<-white_wine_colnames$Variables
@@ -66,12 +70,12 @@ colnames(red_wine_tbl)<-white_wine_colnames$Variables
 red_wine_tbl$type="red"
 
 #Printing data to check that variable names and type indicator are correct
-red_wine_tbl
+print(red_wine_tbl,n=30)
 ```
 
 ### 5.
 
-Next, we will bind the two wine tibbles.
+Next, we will bind the two wine tibbles. To demonstrate the code was successful, note the number of rows in the new tibble. 
 
 ```{r}
 #Binding wine datasets
@@ -86,7 +90,8 @@ Next, we will subset the data to only those of high quality (`quality > 6.5`) wi
 ```{r}
 #Filtering out low-quality wines as well as those with unreasonable alcohol values
 wine_tbl |>
-  filter(quality > 6.5, alcohol < 132)
+  filter(quality > 6.5, alcohol < 132) |>
+  print(n=30)
 ```
 
 ### 7.
@@ -98,7 +103,8 @@ We will continue our data manipulation by sorting the data from highest to lowes
 #then sorting from highest to lowest quality
 wine_tbl |>
   filter(quality > 6.5, alcohol < 132) |>
-  arrange(desc(quality))
+  arrange(desc(quality)) |>
+  print(n=30)
 ```
 
 ### 8.
@@ -111,7 +117,8 @@ Still continuing our data manipulation, we will subset to only the variables con
 wine_tbl |>
   filter(quality > 6.5, alcohol < 132) |>
   arrange(desc(quality)) |>
-  select(contains("acid"), alcohol, type, quality)
+  select(contains("acid"), alcohol, type, quality) |>
+  print(n=30)
 ```
 
 
@@ -129,5 +136,6 @@ wine_tbl |>
   select(contains("acid"), alcohol, type, quality) |>
   group_by(quality) |>
   mutate(alcohol_mean=mean(alcohol),
-         alcohol_sd=sd(alcohol))
+         alcohol_sd=sd(alcohol)) |>
+  print(n=30)
 ```

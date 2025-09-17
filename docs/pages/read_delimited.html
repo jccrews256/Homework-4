@@ -242,6 +242,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<p>For this task, we will be reading in and manipulating delimited data.</p>
 <p>First, we need to add in our packages.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -295,7 +296,7 @@ dbl (11): Id, RI, Na, Mg, Al, Si, K, Ca, Ba, Fe, Type_of_glass
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Printing result</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>glass_tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(glass_tbl,<span class="at">n=</span><span class="dv">30</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 214 × 11
       Id    RI    Na    Mg    Al    Si     K    Ca    Ba    Fe Type_of_glass
@@ -310,7 +311,27 @@ dbl (11): Id, RI, Na, Mg, Al, Si, K, Ca, Ba, Fe, Type_of_glass
  8     8  1.52  13.2  3.61  1.05  73.2  0.57  8.24     0  0                1
  9     9  1.52  14.0  3.58  1.37  72.1  0.56  8.3      0  0                1
 10    10  1.52  13    3.6   1.36  73.0  0.57  8.4      0  0.11             1
-# ℹ 204 more rows</code></pre>
+11    11  1.52  12.7  3.46  1.56  73.2  0.67  8.09     0  0.24             1
+12    12  1.52  12.8  3.66  1.27  73.0  0.6   8.56     0  0                1
+13    13  1.52  12.9  3.43  1.4   73.3  0.69  8.05     0  0.24             1
+14    14  1.52  12.9  3.56  1.27  73.2  0.54  8.38     0  0.17             1
+15    15  1.52  12.6  3.59  1.31  73.3  0.58  8.5      0  0                1
+16    16  1.52  12.8  3.54  1.23  73.2  0.58  8.39     0  0                1
+17    17  1.52  12.7  3.67  1.16  73.1  0.61  8.7      0  0                1
+18    18  1.52  14.4  3.85  0.89  71.4  0.15  9.15     0  0                1
+19    19  1.52  13.9  3.73  1.18  72.1  0.06  8.89     0  0                1
+20    20  1.52  13.0  3.54  1.69  72.7  0.54  8.44     0  0.07             1
+21    21  1.52  12.8  3.55  1.49  72.8  0.54  8.52     0  0.19             1
+22    22  1.52  14.8  3.75  0.29  72.0  0.03  9        0  0                1
+23    23  1.52  12.8  3.62  1.29  72.8  0.59  8.7      0  0                1
+24    24  1.52  12.8  3.57  1.35  73.0  0.62  8.59     0  0                1
+25    25  1.52  13.4  3.5   1.15  72.8  0.5   8.43     0  0                1
+26    26  1.52  13.0  3.54  1.21  73    0.65  8.53     0  0                1
+27    27  1.52  13.2  3.48  1.41  72.6  0.59  8.43     0  0                1
+28    28  1.52  12.9  3.48  1.33  73.0  0.56  8.43     0  0                1
+29    29  1.52  12.6  3.52  1.43  73.2  0.57  8.54     0  0                1
+30    30  1.52  13.1  3.49  1.28  72.9  0.6   8.49     0  0                1
+# ℹ 184 more rows</code></pre>
 </div>
 </div>
 </section>
@@ -326,7 +347,8 @@ dbl (11): Id, RI, Na, Mg, Al, Si, K, Ca, Ba, Fe, Type_of_glass
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">ifelse</span>(Type_of_glass<span class="sc">==</span><span class="dv">4</span>,<span class="st">"vehicle_windows_non_float_processed"</span>,</span>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>                              <span class="fu">ifelse</span>(Type_of_glass<span class="sc">==</span><span class="dv">5</span>,<span class="st">"containers"</span>,</span>
 <span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>                                <span class="fu">ifelse</span>(Type_of_glass<span class="sc">==</span><span class="dv">6</span>,<span class="st">"tableware"</span>,</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>                                  <span class="fu">ifelse</span>(Type_of_glass<span class="sc">==</span><span class="dv">7</span>,<span class="st">"headlamps"</span>,<span class="st">"error"</span>))))))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>                                  <span class="fu">ifelse</span>(Type_of_glass<span class="sc">==</span><span class="dv">7</span>,<span class="st">"headlamps"</span>,<span class="st">"error"</span>)))))))) <span class="sc">|&gt;</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="at">n=</span><span class="dv">30</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 214 × 11
       Id    RI    Na    Mg    Al    Si     K    Ca    Ba    Fe Type_of_glass    
@@ -341,7 +363,27 @@ dbl (11): Id, RI, Na, Mg, Al, Si, K, Ca, Ba, Fe, Type_of_glass
  8     8  1.52  13.2  3.61  1.05  73.2  0.57  8.24     0  0    building_windows…
  9     9  1.52  14.0  3.58  1.37  72.1  0.56  8.3      0  0    building_windows…
 10    10  1.52  13    3.6   1.36  73.0  0.57  8.4      0  0.11 building_windows…
-# ℹ 204 more rows</code></pre>
+11    11  1.52  12.7  3.46  1.56  73.2  0.67  8.09     0  0.24 building_windows…
+12    12  1.52  12.8  3.66  1.27  73.0  0.6   8.56     0  0    building_windows…
+13    13  1.52  12.9  3.43  1.4   73.3  0.69  8.05     0  0.24 building_windows…
+14    14  1.52  12.9  3.56  1.27  73.2  0.54  8.38     0  0.17 building_windows…
+15    15  1.52  12.6  3.59  1.31  73.3  0.58  8.5      0  0    building_windows…
+16    16  1.52  12.8  3.54  1.23  73.2  0.58  8.39     0  0    building_windows…
+17    17  1.52  12.7  3.67  1.16  73.1  0.61  8.7      0  0    building_windows…
+18    18  1.52  14.4  3.85  0.89  71.4  0.15  9.15     0  0    building_windows…
+19    19  1.52  13.9  3.73  1.18  72.1  0.06  8.89     0  0    building_windows…
+20    20  1.52  13.0  3.54  1.69  72.7  0.54  8.44     0  0.07 building_windows…
+21    21  1.52  12.8  3.55  1.49  72.8  0.54  8.52     0  0.19 building_windows…
+22    22  1.52  14.8  3.75  0.29  72.0  0.03  9        0  0    building_windows…
+23    23  1.52  12.8  3.62  1.29  72.8  0.59  8.7      0  0    building_windows…
+24    24  1.52  12.8  3.57  1.35  73.0  0.62  8.59     0  0    building_windows…
+25    25  1.52  13.4  3.5   1.15  72.8  0.5   8.43     0  0    building_windows…
+26    26  1.52  13.0  3.54  1.21  73    0.65  8.53     0  0    building_windows…
+27    27  1.52  13.2  3.48  1.41  72.6  0.59  8.43     0  0    building_windows…
+28    28  1.52  12.9  3.48  1.33  73.0  0.56  8.43     0  0    building_windows…
+29    29  1.52  12.6  3.52  1.43  73.2  0.57  8.54     0  0    building_windows…
+30    30  1.52  13.1  3.49  1.28  72.9  0.6   8.49     0  0    building_windows…
+# ℹ 184 more rows</code></pre>
 </div>
 </div>
 </section>
@@ -359,22 +401,43 @@ dbl (11): Id, RI, Na, Mg, Al, Si, K, Ca, Ba, Fe, Type_of_glass
 <span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>                              <span class="fu">ifelse</span>(Type_of_glass<span class="sc">==</span><span class="dv">5</span>,<span class="st">"containers"</span>,</span>
 <span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>                                <span class="fu">ifelse</span>(Type_of_glass<span class="sc">==</span><span class="dv">6</span>,<span class="st">"tableware"</span>,</span>
 <span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>                                  <span class="fu">ifelse</span>(Type_of_glass<span class="sc">==</span><span class="dv">7</span>,<span class="st">"headlamps"</span>,<span class="st">"error"</span>)))))))) <span class="sc">|&gt;</span></span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Fe<span class="sc">&lt;</span> <span class="fl">0.2</span>, Type_of_glass <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"tableware"</span>,<span class="st">"headlamps"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Fe<span class="sc">&lt;</span> <span class="fl">0.2</span>, Type_of_glass <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"tableware"</span>,<span class="st">"headlamps"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="at">n=</span><span class="dv">30</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 38 × 11
       Id    RI    Na    Mg    Al    Si     K    Ca    Ba    Fe Type_of_glass
    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;        
- 1   177  1.52  14    2.39  1.56  72.4  0     9.57  0        0 tableware    
- 2   178  1.52  13.8  2.41  1.19  72.8  0     9.77  0        0 tableware    
- 3   179  1.52  14.5  2.24  1.62  72.4  0     9.26  0        0 tableware    
- 4   180  1.52  14.1  2.19  1.66  72.7  0     9.32  0        0 tableware    
- 5   181  1.51  14.4  1.74  1.54  74.6  0     7.59  0        0 tableware    
- 6   182  1.52  15.0  0.78  1.74  72.5  0     9.95  0        0 tableware    
- 7   183  1.52  14.2  0     2.09  72.7  0    10.9   0        0 tableware    
- 8   184  1.52  14.6  0     0.56  73.5  0    11.2   0        0 tableware    
- 9   185  1.51  17.4  0     0.34  75.4  0     6.65  0        0 tableware    
-10   186  1.51  13.7  3.2   1.81  72.8  1.76  5.43  1.19     0 headlamps    
-# ℹ 28 more rows</code></pre>
+ 1   177  1.52  14    2.39  1.56  72.4  0     9.57  0     0    tableware    
+ 2   178  1.52  13.8  2.41  1.19  72.8  0     9.77  0     0    tableware    
+ 3   179  1.52  14.5  2.24  1.62  72.4  0     9.26  0     0    tableware    
+ 4   180  1.52  14.1  2.19  1.66  72.7  0     9.32  0     0    tableware    
+ 5   181  1.51  14.4  1.74  1.54  74.6  0     7.59  0     0    tableware    
+ 6   182  1.52  15.0  0.78  1.74  72.5  0     9.95  0     0    tableware    
+ 7   183  1.52  14.2  0     2.09  72.7  0    10.9   0     0    tableware    
+ 8   184  1.52  14.6  0     0.56  73.5  0    11.2   0     0    tableware    
+ 9   185  1.51  17.4  0     0.34  75.4  0     6.65  0     0    tableware    
+10   186  1.51  13.7  3.2   1.81  72.8  1.76  5.43  1.19  0    headlamps    
+11   187  1.52  14.3  3.26  2.22  71.2  1.46  5.79  1.63  0    headlamps    
+12   188  1.52  13.4  3.34  1.23  72.4  0.6   8.83  0     0    headlamps    
+13   189  1.52  14.9  2.2   2.06  70.3  0.76  9.76  0     0    headlamps    
+14   190  1.52  15.8  1.83  1.31  70.4  0.31  8.61  1.68  0    headlamps    
+15   191  1.52  13.9  1.78  1.79  73.1  0     8.67  0.76  0    headlamps    
+16   192  1.52  14.8  0     2.38  73.3  0     8.76  0.64  0.09 headlamps    
+17   193  1.52  14.2  0     2.79  73.5  0.04  9.04  0.4   0.09 headlamps    
+18   194  1.52  14.8  0     2     73.0  0     8.53  1.59  0.08 headlamps    
+19   195  1.52  14.6  0     1.98  73.3  0     8.52  1.57  0.07 headlamps    
+20   196  1.52  14.1  0     2.68  73.4  0.08  9.07  0.61  0.05 headlamps    
+21   197  1.52  13.9  0     2.54  73.2  0.14  9.41  0.81  0.01 headlamps    
+22   198  1.52  14.7  0     2.34  73.3  0     8.95  0.66  0    headlamps    
+23   199  1.52  14.4  0     2.66  73.1  0.04  9.08  0.64  0    headlamps    
+24   200  1.52  15.0  0     2.51  73.0  0.05  8.83  0.53  0    headlamps    
+25   201  1.52  15.2  0     2.25  73.5  0     8.34  0.63  0    headlamps    
+26   202  1.52  12.0  0     1.19  75.2  2.7   8.93  0     0    headlamps    
+27   203  1.52  14.8  0     2.42  73.7  0     8.39  0.56  0    headlamps    
+28   204  1.52  14.8  0     1.99  73.1  0     8.28  1.71  0    headlamps    
+29   205  1.52  15.0  0     2.27  73.3  0     8.71  0.67  0    headlamps    
+30   206  1.52  15.0  0     1.8   73.0  0     8.61  1.55  0    headlamps    
+# ℹ 8 more rows</code></pre>
 </div>
 </div>
 </section>
@@ -388,7 +451,9 @@ dbl (11): Id, RI, Na, Mg, Al, Si, K, Ca, Ba, Fe, Type_of_glass
 <p>First, we will read in these fixed-width data.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Reading in data file</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>yeast_tbl<span class="ot">&lt;-</span><span class="fu">read_fwf</span>(<span class="st">"https://www4.stat.ncsu.edu/online/datasets/yeast.data"</span>,<span class="fu">fwf_widths</span>(<span class="fu">c</span>(<span class="dv">12</span>,<span class="dv">6</span>,<span class="dv">6</span>,<span class="dv">6</span>,<span class="dv">6</span>,<span class="dv">6</span>,<span class="dv">6</span>,<span class="dv">6</span>,<span class="dv">6</span>,<span class="dv">3</span>),<span class="at">col_names=</span><span class="fu">c</span>(<span class="st">"seq_name"</span>,<span class="st">"mcg"</span>,<span class="st">"gvh"</span>,<span class="st">"alm"</span>,<span class="st">"mit"</span>,<span class="st">"erl"</span>,<span class="st">"pox"</span>,<span class="st">"vac"</span>,<span class="st">"nuc"</span>,<span class="st">"class"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>yeast_tbl<span class="ot">&lt;-</span><span class="fu">read_fwf</span>(<span class="st">"https://www4.stat.ncsu.edu/online/datasets/yeast.data"</span>,</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">fwf_widths</span>(<span class="fu">c</span>(<span class="dv">12</span>,<span class="dv">6</span>,<span class="dv">6</span>,<span class="dv">6</span>,<span class="dv">6</span>,<span class="dv">6</span>,<span class="dv">6</span>,<span class="dv">6</span>,<span class="dv">6</span>,<span class="dv">3</span>),</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>                               <span class="at">col_names=</span><span class="fu">c</span>(<span class="st">"seq_name"</span>,<span class="st">"mcg"</span>,<span class="st">"gvh"</span>,<span class="st">"alm"</span>,<span class="st">"mit"</span>,<span class="st">"erl"</span>,<span class="st">"pox"</span>,<span class="st">"vac"</span>,<span class="st">"nuc"</span>,<span class="st">"class"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 1484 Columns: 10
 ── Column specification ────────────────────────────────────────────────────────
@@ -400,7 +465,7 @@ dbl (8): mcg, gvh, alm, mit, erl, pox, vac, nuc
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Printing resultant tibble</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(yeast_tbl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(yeast_tbl,<span class="at">n=</span><span class="dv">30</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1,484 × 10
    seq_name     mcg   gvh   alm   mit   erl   pox   vac   nuc class
@@ -415,7 +480,27 @@ dbl (8): mcg, gvh, alm, mit, erl, pox, vac, nuc
  8 BAF1_YEAST  0.48  0.45  0.59  0.2    0.5   0    0.58  0.34 NUC  
  9 ABF2_YEAST  0.55  0.5   0.66  0.36   0.5   0    0.49  0.22 MIT  
 10 ABP1_YEAST  0.4   0.39  0.6   0.15   0.5   0    0.58  0.3  CYT  
-# ℹ 1,474 more rows</code></pre>
+11 ACE1_YEAST  0.43  0.39  0.54  0.21   0.5   0    0.53  0.27 NUC  
+12 ACE2_YEAST  0.42  0.37  0.59  0.2    0.5   0    0.52  0.29 NUC  
+13 ACH1_YEAST  0.4   0.42  0.57  0.35   0.5   0    0.53  0.25 CYT  
+14 ACON_YEAST  0.6   0.4   0.52  0.46   0.5   0    0.53  0.22 MIT  
+15 ACR1_YEAST  0.66  0.55  0.45  0.19   0.5   0    0.46  0.22 MIT  
+16 ACT_YEAST   0.46  0.44  0.52  0.11   0.5   0    0.5   0.22 CYT  
+17 ACT2_YEAST  0.47  0.39  0.5   0.11   0.5   0    0.49  0.4  CYT  
+18 ACT3_YEAST  0.58  0.47  0.54  0.11   0.5   0    0.51  0.26 NUC  
+19 ACT5_YEAST  0.5   0.34  0.55  0.21   0.5   0    0.49  0.22 NUC  
+20 ADA2_YEAST  0.61  0.6   0.55  0.21   0.5   0    0.5   0.25 NUC  
+21 C1TC_YEAST  0.45  0.4   0.5   0.16   0.5   0    0.5   0.22 CYT  
+22 PUR4_YEAST  0.43  0.44  0.48  0.22   0.5   0    0.51  0.22 CYT  
+23 PUR3_YEAST  0.73  0.63  0.42  0.3    0.5   0    0.49  0.22 CYT  
+24 ADH1_YEAST  0.43  0.53  0.52  0.13   0.5   0    0.55  0.22 CYT  
+25 ADH2_YEAST  0.46  0.53  0.52  0.15   0.5   0    0.58  0.22 CYT  
+26 ADH3_YEAST  0.51  0.51  0.52  0.51   0.5   0    0.54  0.22 MIT  
+27 ADH4_YEAST  0.59  0.45  0.53  0.19   0.5   0    0.59  0.27 CYT  
+28 KAD1_YEAST  0.57  0.47  0.6   0.18   0.5   0    0.51  0.22 CYT  
+29 KAD2_YEAST  0.63  0.67  0.57  0.24   0.5   0    0.49  0.22 MIT  
+30 ADP1_YEAST  0.8   0.88  0.36  0.39   0.5   0    0.56  0.33 ME1  
+# ℹ 1,454 more rows</code></pre>
 </div>
 </div>
 </section>
@@ -425,7 +510,8 @@ dbl (8): mcg, gvh, alm, mit, erl, pox, vac, nuc
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Removing seq_name and nuc</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>yeast_tbl <span class="sc">|&gt;</span> </span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>seq_name,<span class="sc">-</span>nuc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>seq_name,<span class="sc">-</span>nuc) <span class="sc">|&gt;</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="at">n=</span><span class="dv">30</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1,484 × 8
      mcg   gvh   alm   mit   erl   pox   vac class
@@ -440,7 +526,27 @@ dbl (8): mcg, gvh, alm, mit, erl, pox, vac, nuc
  8  0.48  0.45  0.59  0.2    0.5   0    0.58 NUC  
  9  0.55  0.5   0.66  0.36   0.5   0    0.49 MIT  
 10  0.4   0.39  0.6   0.15   0.5   0    0.58 CYT  
-# ℹ 1,474 more rows</code></pre>
+11  0.43  0.39  0.54  0.21   0.5   0    0.53 NUC  
+12  0.42  0.37  0.59  0.2    0.5   0    0.52 NUC  
+13  0.4   0.42  0.57  0.35   0.5   0    0.53 CYT  
+14  0.6   0.4   0.52  0.46   0.5   0    0.53 MIT  
+15  0.66  0.55  0.45  0.19   0.5   0    0.46 MIT  
+16  0.46  0.44  0.52  0.11   0.5   0    0.5  CYT  
+17  0.47  0.39  0.5   0.11   0.5   0    0.49 CYT  
+18  0.58  0.47  0.54  0.11   0.5   0    0.51 NUC  
+19  0.5   0.34  0.55  0.21   0.5   0    0.49 NUC  
+20  0.61  0.6   0.55  0.21   0.5   0    0.5  NUC  
+21  0.45  0.4   0.5   0.16   0.5   0    0.5  CYT  
+22  0.43  0.44  0.48  0.22   0.5   0    0.51 CYT  
+23  0.73  0.63  0.42  0.3    0.5   0    0.49 CYT  
+24  0.43  0.53  0.52  0.13   0.5   0    0.55 CYT  
+25  0.46  0.53  0.52  0.15   0.5   0    0.58 CYT  
+26  0.51  0.51  0.52  0.51   0.5   0    0.54 MIT  
+27  0.59  0.45  0.53  0.19   0.5   0    0.59 CYT  
+28  0.57  0.47  0.6   0.18   0.5   0    0.51 CYT  
+29  0.63  0.67  0.57  0.24   0.5   0    0.49 MIT  
+30  0.8   0.88  0.36  0.39   0.5   0    0.56 ME1  
+# ℹ 1,454 more rows</code></pre>
 </div>
 </div>
 </section>
@@ -453,7 +559,8 @@ dbl (8): mcg, gvh, alm, mit, erl, pox, vac, nuc
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>yeast_tbl <span class="sc">|&gt;</span> </span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>seq_name,<span class="sc">-</span>nuc) <span class="sc">|&gt;</span></span>
 <span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(class) <span class="sc">|&gt;</span></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric),<span class="fu">list</span>(<span class="at">mean=</span>mean,<span class="at">median=</span>median),<span class="at">.names=</span><span class="st">"{.fn}_{.col}"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric),<span class="fu">list</span>(<span class="at">mean=</span>mean,<span class="at">median=</span>median),<span class="at">.names=</span><span class="st">"{.fn}_{.col}"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="at">n=</span><span class="dv">30</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1,484 × 22
 # Groups:   class [10]
@@ -469,7 +576,27 @@ dbl (8): mcg, gvh, alm, mit, erl, pox, vac, nuc
  8  0.48  0.45  0.59  0.2    0.5   0    0.58 NUC      0.452       0.45    0.456
  9  0.55  0.5   0.66  0.36   0.5   0    0.49 MIT      0.521       0.51    0.533
 10  0.4   0.39  0.6   0.15   0.5   0    0.58 CYT      0.481       0.48    0.470
-# ℹ 1,474 more rows
+11  0.43  0.39  0.54  0.21   0.5   0    0.53 NUC      0.452       0.45    0.456
+12  0.42  0.37  0.59  0.2    0.5   0    0.52 NUC      0.452       0.45    0.456
+13  0.4   0.42  0.57  0.35   0.5   0    0.53 CYT      0.481       0.48    0.470
+14  0.6   0.4   0.52  0.46   0.5   0    0.53 MIT      0.521       0.51    0.533
+15  0.66  0.55  0.45  0.19   0.5   0    0.46 MIT      0.521       0.51    0.533
+16  0.46  0.44  0.52  0.11   0.5   0    0.5  CYT      0.481       0.48    0.470
+17  0.47  0.39  0.5   0.11   0.5   0    0.49 CYT      0.481       0.48    0.470
+18  0.58  0.47  0.54  0.11   0.5   0    0.51 NUC      0.452       0.45    0.456
+19  0.5   0.34  0.55  0.21   0.5   0    0.49 NUC      0.452       0.45    0.456
+20  0.61  0.6   0.55  0.21   0.5   0    0.5  NUC      0.452       0.45    0.456
+21  0.45  0.4   0.5   0.16   0.5   0    0.5  CYT      0.481       0.48    0.470
+22  0.43  0.44  0.48  0.22   0.5   0    0.51 CYT      0.481       0.48    0.470
+23  0.73  0.63  0.42  0.3    0.5   0    0.49 CYT      0.481       0.48    0.470
+24  0.43  0.53  0.52  0.13   0.5   0    0.55 CYT      0.481       0.48    0.470
+25  0.46  0.53  0.52  0.15   0.5   0    0.58 CYT      0.481       0.48    0.470
+26  0.51  0.51  0.52  0.51   0.5   0    0.54 MIT      0.521       0.51    0.533
+27  0.59  0.45  0.53  0.19   0.5   0    0.59 CYT      0.481       0.48    0.470
+28  0.57  0.47  0.6   0.18   0.5   0    0.51 CYT      0.481       0.48    0.470
+29  0.63  0.67  0.57  0.24   0.5   0    0.49 MIT      0.521       0.51    0.533
+30  0.8   0.88  0.36  0.39   0.5   0    0.56 ME1      0.789       0.78    0.757
+# ℹ 1,454 more rows
 # ℹ 11 more variables: median_gvh &lt;dbl&gt;, mean_alm &lt;dbl&gt;, median_alm &lt;dbl&gt;,
 #   mean_mit &lt;dbl&gt;, median_mit &lt;dbl&gt;, mean_erl &lt;dbl&gt;, median_erl &lt;dbl&gt;,
 #   mean_pox &lt;dbl&gt;, median_pox &lt;dbl&gt;, mean_vac &lt;dbl&gt;, median_vac &lt;dbl&gt;</code></pre>

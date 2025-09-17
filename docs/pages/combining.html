@@ -238,6 +238,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<p>For this task, we will manipulate and combine two wine datasets.</p>
+<p>First, we need to load our packages.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -273,31 +275,50 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>For this task, we will manipulate and combine two wine datasets.</p>
 <section id="section" class="level3">
 <h3 class="anchored" data-anchor-id="section">1.</h3>
-<p>First, I will read in the first sheet of the file, which I have downloaded locally.</p>
+<p>Let’s read in the first sheet of the file, which I have downloaded locally.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Reading in the data</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>white_wine_tbl<span class="ot">&lt;-</span><span class="fu">read_excel</span>(<span class="st">"../white-wine.xlsx"</span>, <span class="at">sheet=</span><span class="fu">excel_sheets</span>(<span class="st">"../white-wine.xlsx"</span>)[<span class="dv">1</span>])</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Printing new tibble</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>white_wine_tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(white_wine_tbl,<span class="at">n=</span><span class="dv">30</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4,898 × 12
    `fixed acidity` `volatile acidity` `citric acid` `residual sugar` chlorides
              &lt;dbl&gt;              &lt;dbl&gt;         &lt;dbl&gt;            &lt;dbl&gt;     &lt;dbl&gt;
- 1               7               0.27          0.36             20.7     0.045
- 2              63               0.3           0.34              1.6     0.049
- 3              81               0.28          0.4               6.9     0.05 
- 4              72               0.23          0.32              8.5     0.058
- 5              72               0.23          0.32              8.5     0.058
- 6              81               0.28          0.4               6.9     0.05 
- 7              62               0.32          0.16              7       0.045
- 8               7               0.27          0.36             20.7     0.045
- 9              63               0.3           0.34              1.6     0.049
-10              81               0.22          0.43              1.5     0.044
-# ℹ 4,888 more rows
+ 1               7               0.27          0.36            20.7      0.045
+ 2              63               0.3           0.34             1.6      0.049
+ 3              81               0.28          0.4              6.9      0.05 
+ 4              72               0.23          0.32             8.5      0.058
+ 5              72               0.23          0.32             8.5      0.058
+ 6              81               0.28          0.4              6.9      0.05 
+ 7              62               0.32          0.16             7        0.045
+ 8               7               0.27          0.36            20.7      0.045
+ 9              63               0.3           0.34             1.6      0.049
+10              81               0.22          0.43             1.5      0.044
+11              81               0.27          0.41             1.45     0.033
+12              86               0.23          0.4              4.2      0.035
+13              79               0.18          0.37             1.2      0.04 
+14              66               0.16          0.4              1.5      0.044
+15              83               0.42          0.62            19.2      0.04 
+16              66               0.17          0.38             1.5      0.032
+17              63               0.48          0.04             1.1      0.046
+18              62               0.66          0.48             1.2      0.029
+19              74               0.34          0.42             1.1      0.033
+20              65               0.31          0.14             7.5      0.044
+21              62               0.66          0.48             1.2      0.029
+22              64               0.31          0.38             2.9      0.038
+23              68               0.26          0.42             1.7      0.049
+24              76               0.67          0.14             1.5      0.074
+25              66               0.27          0.41             1.3      0.052
+26               7               0.25          0.32             9        0.046
+27              69               0.24          0.35             1        0.052
+28               7               0.28          0.39             8.7      0.051
+29              74               0.27          0.48             1.1      0.047
+30              72               0.32          0.36             2        0.033
+# ℹ 4,868 more rows
 # ℹ 7 more variables: `free sulfur dioxide` &lt;dbl&gt;,
 #   `total sulfur dioxide` &lt;dbl&gt;, density &lt;dbl&gt;, pH &lt;dbl&gt;, sulphates &lt;dbl&gt;,
 #   alcohol &lt;dbl&gt;, quality &lt;dbl&gt;</code></pre>
@@ -308,9 +329,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="section-1">2.</h3>
 <p>Next, we will grab the clean variable names in the second sheet of the file and replace our original tibble column names with those.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>white_wine_colnames<span class="ot">&lt;-</span><span class="fu">read_excel</span>(<span class="st">"../white-wine.xlsx"</span>, <span class="at">sheet=</span><span class="fu">excel_sheets</span>(<span class="st">"../white-wine.xlsx"</span>)[<span class="dv">2</span>])</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(white_wine_tbl)<span class="ot">&lt;-</span>white_wine_colnames<span class="sc">$</span>Variables</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Reading in column names</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>white_wine_colnames<span class="ot">&lt;-</span><span class="fu">read_excel</span>(<span class="st">"../white-wine.xlsx"</span>, </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                                <span class="at">sheet=</span><span class="fu">excel_sheets</span>(<span class="st">"../white-wine.xlsx"</span>)[<span class="dv">2</span>])</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Assigning column names</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(white_wine_tbl)<span class="ot">&lt;-</span>white_wine_colnames<span class="sc">$</span>Variables</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="section-2" class="level3">
@@ -321,22 +345,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>white_wine_tbl<span class="sc">$</span>type<span class="ot">=</span><span class="st">"white"</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Printing updated tibble</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>white_wine_tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(white_wine_tbl,<span class="at">n=</span><span class="dv">30</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4,898 × 13
    fixed_acidity volatile_acidity citric_acid residual_sugar chlorides
            &lt;dbl&gt;            &lt;dbl&gt;       &lt;dbl&gt;          &lt;dbl&gt;     &lt;dbl&gt;
- 1             7             0.27        0.36           20.7     0.045
- 2            63             0.3         0.34            1.6     0.049
- 3            81             0.28        0.4             6.9     0.05 
- 4            72             0.23        0.32            8.5     0.058
- 5            72             0.23        0.32            8.5     0.058
- 6            81             0.28        0.4             6.9     0.05 
- 7            62             0.32        0.16            7       0.045
- 8             7             0.27        0.36           20.7     0.045
- 9            63             0.3         0.34            1.6     0.049
-10            81             0.22        0.43            1.5     0.044
-# ℹ 4,888 more rows
+ 1             7             0.27        0.36          20.7      0.045
+ 2            63             0.3         0.34           1.6      0.049
+ 3            81             0.28        0.4            6.9      0.05 
+ 4            72             0.23        0.32           8.5      0.058
+ 5            72             0.23        0.32           8.5      0.058
+ 6            81             0.28        0.4            6.9      0.05 
+ 7            62             0.32        0.16           7        0.045
+ 8             7             0.27        0.36          20.7      0.045
+ 9            63             0.3         0.34           1.6      0.049
+10            81             0.22        0.43           1.5      0.044
+11            81             0.27        0.41           1.45     0.033
+12            86             0.23        0.4            4.2      0.035
+13            79             0.18        0.37           1.2      0.04 
+14            66             0.16        0.4            1.5      0.044
+15            83             0.42        0.62          19.2      0.04 
+16            66             0.17        0.38           1.5      0.032
+17            63             0.48        0.04           1.1      0.046
+18            62             0.66        0.48           1.2      0.029
+19            74             0.34        0.42           1.1      0.033
+20            65             0.31        0.14           7.5      0.044
+21            62             0.66        0.48           1.2      0.029
+22            64             0.31        0.38           2.9      0.038
+23            68             0.26        0.42           1.7      0.049
+24            76             0.67        0.14           1.5      0.074
+25            66             0.27        0.41           1.3      0.052
+26             7             0.25        0.32           9        0.046
+27            69             0.24        0.35           1        0.052
+28             7             0.28        0.39           8.7      0.051
+29            74             0.27        0.48           1.1      0.047
+30            72             0.32        0.36           2        0.033
+# ℹ 4,868 more rows
 # ℹ 8 more variables: free_sulfur_dioxide &lt;dbl&gt;, total_sulfur_dioxide &lt;dbl&gt;,
 #   density &lt;dbl&gt;, pH &lt;dbl&gt;, sulphates &lt;dbl&gt;, alcohol &lt;dbl&gt;, quality &lt;dbl&gt;,
 #   type &lt;chr&gt;</code></pre>
@@ -359,22 +403,42 @@ dbl (12): fixed acidity, volatile acidity, citric acid, residual sugar, chlo...
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Printing data to check that it read in correctly</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>red_wine_tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(red_wine_tbl,<span class="at">n=</span><span class="dv">30</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1,599 × 12
    `fixed acidity` `volatile acidity` `citric acid` `residual sugar` chlorides
              &lt;dbl&gt;              &lt;dbl&gt;         &lt;dbl&gt;            &lt;dbl&gt;     &lt;dbl&gt;
- 1             7.4               0.7           0                 1.9     0.076
- 2             7.8               0.88          0                 2.6     0.098
- 3             7.8               0.76          0.04              2.3     0.092
- 4            11.2               0.28          0.56              1.9     0.075
- 5             7.4               0.7           0                 1.9     0.076
- 6             7.4               0.66          0                 1.8     0.075
- 7             7.9               0.6           0.06              1.6     0.069
- 8             7.3               0.65          0                 1.2     0.065
- 9             7.8               0.58          0.02              2       0.073
-10             7.5               0.5           0.36              6.1     0.071
-# ℹ 1,589 more rows
+ 1             7.4              0.7            0                 1.9     0.076
+ 2             7.8              0.88           0                 2.6     0.098
+ 3             7.8              0.76           0.04              2.3     0.092
+ 4            11.2              0.28           0.56              1.9     0.075
+ 5             7.4              0.7            0                 1.9     0.076
+ 6             7.4              0.66           0                 1.8     0.075
+ 7             7.9              0.6            0.06              1.6     0.069
+ 8             7.3              0.65           0                 1.2     0.065
+ 9             7.8              0.58           0.02              2       0.073
+10             7.5              0.5            0.36              6.1     0.071
+11             6.7              0.58           0.08              1.8     0.097
+12             7.5              0.5            0.36              6.1     0.071
+13             5.6              0.615          0                 1.6     0.089
+14             7.8              0.61           0.29              1.6     0.114
+15             8.9              0.62           0.18              3.8     0.176
+16             8.9              0.62           0.19              3.9     0.17 
+17             8.5              0.28           0.56              1.8     0.092
+18             8.1              0.56           0.28              1.7     0.368
+19             7.4              0.59           0.08              4.4     0.086
+20             7.9              0.32           0.51              1.8     0.341
+21             8.9              0.22           0.48              1.8     0.077
+22             7.6              0.39           0.31              2.3     0.082
+23             7.9              0.43           0.21              1.6     0.106
+24             8.5              0.49           0.11              2.3     0.084
+25             6.9              0.4            0.14              2.4     0.085
+26             6.3              0.39           0.16              1.4     0.08 
+27             7.6              0.41           0.24              1.8     0.08 
+28             7.9              0.43           0.21              1.6     0.106
+29             7.1              0.71           0                 1.9     0.08 
+30             7.8              0.645          0                 2       0.082
+# ℹ 1,569 more rows
 # ℹ 7 more variables: `free sulfur dioxide` &lt;dbl&gt;,
 #   `total sulfur dioxide` &lt;dbl&gt;, density &lt;dbl&gt;, pH &lt;dbl&gt;, sulphates &lt;dbl&gt;,
 #   alcohol &lt;dbl&gt;, quality &lt;dbl&gt;</code></pre>
@@ -386,22 +450,42 @@ dbl (12): fixed acidity, volatile acidity, citric acid, residual sugar, chlo...
 <span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>red_wine_tbl<span class="sc">$</span>type<span class="ot">=</span><span class="st">"red"</span></span>
 <span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Printing data to check that variable names and type indicator are correct</span></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>red_wine_tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(red_wine_tbl,<span class="at">n=</span><span class="dv">30</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1,599 × 13
    fixed_acidity volatile_acidity citric_acid residual_sugar chlorides
            &lt;dbl&gt;            &lt;dbl&gt;       &lt;dbl&gt;          &lt;dbl&gt;     &lt;dbl&gt;
- 1           7.4             0.7         0               1.9     0.076
- 2           7.8             0.88        0               2.6     0.098
- 3           7.8             0.76        0.04            2.3     0.092
- 4          11.2             0.28        0.56            1.9     0.075
- 5           7.4             0.7         0               1.9     0.076
- 6           7.4             0.66        0               1.8     0.075
- 7           7.9             0.6         0.06            1.6     0.069
- 8           7.3             0.65        0               1.2     0.065
- 9           7.8             0.58        0.02            2       0.073
-10           7.5             0.5         0.36            6.1     0.071
-# ℹ 1,589 more rows
+ 1           7.4            0.7          0               1.9     0.076
+ 2           7.8            0.88         0               2.6     0.098
+ 3           7.8            0.76         0.04            2.3     0.092
+ 4          11.2            0.28         0.56            1.9     0.075
+ 5           7.4            0.7          0               1.9     0.076
+ 6           7.4            0.66         0               1.8     0.075
+ 7           7.9            0.6          0.06            1.6     0.069
+ 8           7.3            0.65         0               1.2     0.065
+ 9           7.8            0.58         0.02            2       0.073
+10           7.5            0.5          0.36            6.1     0.071
+11           6.7            0.58         0.08            1.8     0.097
+12           7.5            0.5          0.36            6.1     0.071
+13           5.6            0.615        0               1.6     0.089
+14           7.8            0.61         0.29            1.6     0.114
+15           8.9            0.62         0.18            3.8     0.176
+16           8.9            0.62         0.19            3.9     0.17 
+17           8.5            0.28         0.56            1.8     0.092
+18           8.1            0.56         0.28            1.7     0.368
+19           7.4            0.59         0.08            4.4     0.086
+20           7.9            0.32         0.51            1.8     0.341
+21           8.9            0.22         0.48            1.8     0.077
+22           7.6            0.39         0.31            2.3     0.082
+23           7.9            0.43         0.21            1.6     0.106
+24           8.5            0.49         0.11            2.3     0.084
+25           6.9            0.4          0.14            2.4     0.085
+26           6.3            0.39         0.16            1.4     0.08 
+27           7.6            0.41         0.24            1.8     0.08 
+28           7.9            0.43         0.21            1.6     0.106
+29           7.1            0.71         0               1.9     0.08 
+30           7.8            0.645        0               2       0.082
+# ℹ 1,569 more rows
 # ℹ 8 more variables: free_sulfur_dioxide &lt;dbl&gt;, total_sulfur_dioxide &lt;dbl&gt;,
 #   density &lt;dbl&gt;, pH &lt;dbl&gt;, sulphates &lt;dbl&gt;, alcohol &lt;dbl&gt;, quality &lt;dbl&gt;,
 #   type &lt;chr&gt;</code></pre>
@@ -410,7 +494,7 @@ dbl (12): fixed acidity, volatile acidity, citric acid, residual sugar, chlo...
 </section>
 <section id="section-4" class="level3">
 <h3 class="anchored" data-anchor-id="section-4">5.</h3>
-<p>Next, we will bind the two wine tibbles.</p>
+<p>Next, we will bind the two wine tibbles. To demonstrate the code was successful, note the number of rows in the new tibble.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Binding wine datasets</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>wine_tbl<span class="ot">&lt;-</span><span class="fu">bind_rows</span>(red_wine_tbl,white_wine_tbl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -422,22 +506,43 @@ dbl (12): fixed acidity, volatile acidity, citric acid, residual sugar, chlo...
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Filtering out low-quality wines as well as those with unreasonable alcohol values</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>wine_tbl <span class="sc">|&gt;</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(quality <span class="sc">&gt;</span> <span class="fl">6.5</span>, alcohol <span class="sc">&lt;</span> <span class="dv">132</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(quality <span class="sc">&gt;</span> <span class="fl">6.5</span>, alcohol <span class="sc">&lt;</span> <span class="dv">132</span>) <span class="sc">|&gt;</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="at">n=</span><span class="dv">30</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1,206 × 13
    fixed_acidity volatile_acidity citric_acid residual_sugar chlorides
            &lt;dbl&gt;            &lt;dbl&gt;       &lt;dbl&gt;          &lt;dbl&gt;     &lt;dbl&gt;
- 1           7.3            0.65         0               1.2     0.065
- 2           7.8            0.58         0.02            2       0.073
- 3           8.5            0.28         0.56            1.8     0.092
- 4           8.1            0.38         0.28            2.1     0.066
- 5           7.5            0.52         0.16            1.9     0.085
- 6           8              0.59         0.16            1.8     0.065
- 7           5.4            0.835        0.08            1.2     0.046
- 8           9.6            0.32         0.47            1.4     0.056
- 9          12.8            0.3          0.74            2.6     0.095
-10          12.8            0.3          0.74            2.6     0.095
-# ℹ 1,196 more rows
+ 1           7.3            0.65         0              1.2      0.065
+ 2           7.8            0.58         0.02           2        0.073
+ 3           8.5            0.28         0.56           1.8      0.092
+ 4           8.1            0.38         0.28           2.1      0.066
+ 5           7.5            0.52         0.16           1.9      0.085
+ 6           8              0.59         0.16           1.8      0.065
+ 7           5.4            0.835        0.08           1.2      0.046
+ 8           9.6            0.32         0.47           1.4      0.056
+ 9          12.8            0.3          0.74           2.6      0.095
+10          12.8            0.3          0.74           2.6      0.095
+11          11              0.3          0.58           2.1      0.054
+12           5.2            0.48         0.04           1.6      0.054
+13          15              0.21         0.44           2.2      0.075
+14          15              0.21         0.44           2.2      0.075
+15          10              0.31         0.47           2.6      0.085
+16          11.8            0.26         0.52           1.8      0.071
+17           7.9            0.35         0.46           3.6      0.078
+18          10.3            0.32         0.45           6.4      0.073
+19           8.9            0.4          0.32           5.6      0.087
+20           7.7            0.27         0.68           3.5      0.358
+21           8.9            0.4          0.32           5.6      0.087
+22           8.7            0.52         0.09           2.5      0.091
+23           8.7            0.52         0.09           2.5      0.091
+24           9.8            0.66         0.39           3.2      0.083
+25           9.8            0.66         0.39           3.2      0.083
+26          11.6            0.53         0.66           3.65     0.121
+27           7.9            0.65         0.01           2.5      0.078
+28          11.9            0.695        0.53           3.4      0.128
+29          12.5            0.28         0.54           2.3      0.082
+30           6.6            0.815        0.02           2.7      0.072
+# ℹ 1,176 more rows
 # ℹ 8 more variables: free_sulfur_dioxide &lt;dbl&gt;, total_sulfur_dioxide &lt;dbl&gt;,
 #   density &lt;dbl&gt;, pH &lt;dbl&gt;, sulphates &lt;dbl&gt;, alcohol &lt;dbl&gt;, quality &lt;dbl&gt;,
 #   type &lt;chr&gt;</code></pre>
@@ -452,7 +557,8 @@ dbl (12): fixed acidity, volatile acidity, citric acid, residual sugar, chlo...
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co">#then sorting from highest to lowest quality</span></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>wine_tbl <span class="sc">|&gt;</span></span>
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(quality <span class="sc">&gt;</span> <span class="fl">6.5</span>, alcohol <span class="sc">&lt;</span> <span class="dv">132</span>) <span class="sc">|&gt;</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(quality))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(quality)) <span class="sc">|&gt;</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="at">n=</span><span class="dv">30</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1,206 × 13
    fixed_acidity volatile_acidity citric_acid residual_sugar chlorides
@@ -467,7 +573,27 @@ dbl (12): fixed acidity, volatile acidity, citric acid, residual sugar, chlo...
  8           5.6             0.85        0.05            1.4     0.045
  9          12.6             0.31        0.72            2.2     0.072
 10          11.3             0.62        0.67            5.2     0.086
-# ℹ 1,196 more rows
+11           9.4             0.3         0.56            2.8     0.08 
+12          10.7             0.35        0.53            2.6     0.07 
+13          10.7             0.35        0.53            2.6     0.07 
+14           5               0.42        0.24            2       0.06 
+15           7.8             0.57        0.09            2.3     0.065
+16           9.1             0.4         0.5             1.8     0.071
+17          10               0.26        0.54            1.9     0.083
+18           7.9             0.54        0.34            2.5     0.076
+19           8.6             0.42        0.39            1.8     0.068
+20           5.5             0.49        0.03            1.8     0.044
+21           7.2             0.33        0.33            1.7     0.061
+22           7.2             0.38        0.31            2       0.056
+23           7.4             0.36        0.3             1.8     0.074
+24          62               0.66        0.48            1.2     0.029
+25          62               0.66        0.48            1.2     0.029
+26          68               0.26        0.42            1.7     0.049
+27          67               0.23        0.31            2.1     0.046
+28          67               0.23        0.31            2.1     0.046
+29          52               0.44        0.04            1.4     0.036
+30          52               0.44        0.04            1.4     0.036
+# ℹ 1,176 more rows
 # ℹ 8 more variables: free_sulfur_dioxide &lt;dbl&gt;, total_sulfur_dioxide &lt;dbl&gt;,
 #   density &lt;dbl&gt;, pH &lt;dbl&gt;, sulphates &lt;dbl&gt;, alcohol &lt;dbl&gt;, quality &lt;dbl&gt;,
 #   type &lt;chr&gt;</code></pre>
@@ -483,7 +609,8 @@ dbl (12): fixed acidity, volatile acidity, citric acid, residual sugar, chlo...
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>wine_tbl <span class="sc">|&gt;</span></span>
 <span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(quality <span class="sc">&gt;</span> <span class="fl">6.5</span>, alcohol <span class="sc">&lt;</span> <span class="dv">132</span>) <span class="sc">|&gt;</span></span>
 <span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(quality)) <span class="sc">|&gt;</span></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">contains</span>(<span class="st">"acid"</span>), alcohol, type, quality)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">contains</span>(<span class="st">"acid"</span>), alcohol, type, quality) <span class="sc">|&gt;</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="at">n=</span><span class="dv">30</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1,206 × 6
    fixed_acidity volatile_acidity citric_acid alcohol type  quality
@@ -498,7 +625,27 @@ dbl (12): fixed acidity, volatile acidity, citric acid, residual sugar, chlo...
  8           5.6             0.85        0.05    12.9 red         8
  9          12.6             0.31        0.72     9.8 red         8
 10          11.3             0.62        0.67    13.4 red         8
-# ℹ 1,196 more rows</code></pre>
+11           9.4             0.3         0.56    11.7 red         8
+12          10.7             0.35        0.53    11   red         8
+13          10.7             0.35        0.53    11   red         8
+14           5               0.42        0.24    14   red         8
+15           7.8             0.57        0.09    12.7 red         8
+16           9.1             0.4         0.5     12.5 red         8
+17          10               0.26        0.54    11.8 red         8
+18           7.9             0.54        0.34    13.1 red         8
+19           8.6             0.42        0.39    11.7 red         8
+20           5.5             0.49        0.03    14   red         8
+21           7.2             0.33        0.33    10   red         8
+22           7.2             0.38        0.31    11.3 red         8
+23           7.4             0.36        0.3     11.4 red         8
+24          62               0.66        0.48   128   white       8
+25          62               0.66        0.48   128   white       8
+26          68               0.26        0.42   105   white       8
+27          67               0.23        0.31   107   white       8
+28          67               0.23        0.31   107   white       8
+29          52               0.44        0.04   121   white       8
+30          52               0.44        0.04   121   white       8
+# ℹ 1,176 more rows</code></pre>
 </div>
 </div>
 </section>
@@ -515,7 +662,8 @@ dbl (12): fixed acidity, volatile acidity, citric acid, residual sugar, chlo...
 <span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">contains</span>(<span class="st">"acid"</span>), alcohol, type, quality) <span class="sc">|&gt;</span></span>
 <span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(quality) <span class="sc">|&gt;</span></span>
 <span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">alcohol_mean=</span><span class="fu">mean</span>(alcohol),</span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">alcohol_sd=</span><span class="fu">sd</span>(alcohol))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">alcohol_sd=</span><span class="fu">sd</span>(alcohol)) <span class="sc">|&gt;</span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="at">n=</span><span class="dv">30</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1,206 × 8
 # Groups:   quality [3]
@@ -531,7 +679,27 @@ dbl (12): fixed acidity, volatile acidity, citric acid, residual sugar, chlo...
  8           5.6             0.85        0.05    12.9 red         8         94.1
  9          12.6             0.31        0.72     9.8 red         8         94.1
 10          11.3             0.62        0.67    13.4 red         8         94.1
-# ℹ 1,196 more rows
+11           9.4             0.3         0.56    11.7 red         8         94.1
+12          10.7             0.35        0.53    11   red         8         94.1
+13          10.7             0.35        0.53    11   red         8         94.1
+14           5               0.42        0.24    14   red         8         94.1
+15           7.8             0.57        0.09    12.7 red         8         94.1
+16           9.1             0.4         0.5     12.5 red         8         94.1
+17          10               0.26        0.54    11.8 red         8         94.1
+18           7.9             0.54        0.34    13.1 red         8         94.1
+19           8.6             0.42        0.39    11.7 red         8         94.1
+20           5.5             0.49        0.03    14   red         8         94.1
+21           7.2             0.33        0.33    10   red         8         94.1
+22           7.2             0.38        0.31    11.3 red         8         94.1
+23           7.4             0.36        0.3     11.4 red         8         94.1
+24          62               0.66        0.48   128   white       8         94.1
+25          62               0.66        0.48   128   white       8         94.1
+26          68               0.26        0.42   105   white       8         94.1
+27          67               0.23        0.31   107   white       8         94.1
+28          67               0.23        0.31   107   white       8         94.1
+29          52               0.44        0.04   121   white       8         94.1
+30          52               0.44        0.04   121   white       8         94.1
+# ℹ 1,176 more rows
 # ℹ 1 more variable: alcohol_sd &lt;dbl&gt;</code></pre>
 </div>
 </div>

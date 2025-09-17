@@ -6,6 +6,10 @@ editor_options:
   chunk_output_type: inline
 ---
 
-An example pages site with multiple pages and a table of contents.
+Dear grader, 
 
-This could be a landing page for the site. Feel free to put whatever here!
+Prepare to have some fun reviewing Tidyverse code and outputs!
+
+Note that each time I print a dataset, I print the first 30 rows so it is more clear my code worked. 
+
+Cass Crews

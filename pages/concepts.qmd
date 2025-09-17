@@ -27,12 +27,17 @@ editor_options:
   
 5. Rewrite the following nested function call using `BaseR`'s chaining operator:
 
-  > `arrange(filter(select(as_tibble(iris), starts_with("Petal"), Species), Petal.Length <
-        1.55), Species)`
-        
-  > `iris |> 
-        as_tibble() |> 
-        select(starts_with("Petal"),Species) |> 
-        filter(Petal.Length < 1.55) |> 
-        arrange(Species)`
-        
+> ```{r}
+> #| eval: false
+> arrange(filter(select(as_tibble(iris), starts_with("Petal"), Species), Petal.Length <
+>       1.55), Species)
+> ```
+
+> ```{r}
+> #| eval: false
+> `iris |> 
+>    as_tibble() |> 
+>    select(starts_with("Petal"),Species) |> 
+>    filter(Petal.Length < 1.55) |> 
+>    arrange(Species)`
+> ```
