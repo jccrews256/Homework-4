@@ -2,11 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.42">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2025-08-27">
+<meta name="dcterms.date" content="2025-09-17">
 
 <title>Conceptual Questions – Homework 4 Site</title>
 <style>
@@ -38,10 +38,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-0e514215ed9697c63822a2132a5c5b97.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -179,7 +179,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2025-08-27</p>
+      <p class="date">2025-09-17</p>
     </div>
   </div>
   
@@ -191,7 +191,39 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Answers go here!</p>
+<ol type="1">
+<li>If your working directory is <code>myfolder/homework/</code>, what <em>relative</em> path would you specify to get the file located at <code>myfolder/MyData.csv</code>?</li>
+</ol>
+<blockquote class="blockquote">
+<p>The relative path I would specify is <code>"../MyData.csv"</code>.</p>
+</blockquote>
+<ol start="2" type="1">
+<li>What are the major benefits of using R Projects?</li>
+</ol>
+<blockquote class="blockquote">
+<p>R Projects allow us to seamlessly divide our work, as each project has its own working directory, environment, history, folder structure, and source documents. The explicit associationg with a single working directory means we can easily share our work by simply sharing this folder/repo and know the project code should work as long as we have utilized relative file paths. This aspect of R Projects makes them logical tools when utilizing Github repositories for storage and collaboration.</p>
+</blockquote>
+<ol start="3" type="1">
+<li>What is Git and what is GitHub?</li>
+</ol>
+<blockquote class="blockquote">
+<p>Git is a version control software that helps track changes to files across time and allows multiple users to collobrate on the same project. Github is a hosting service that allows us to do Git-based projects on the internet and share them with the world virtually.</p>
+</blockquote>
+<ol start="4" type="1">
+<li>What are the two main differences between a <code>tibble</code> and a <code>data.frame</code>?</li>
+</ol>
+<blockquote class="blockquote">
+<p>First, their printing is more elegant and informative, including the data type of each variable, not printing past the first ten rows, and indicating the total number of columns. Within the Quarto file, a user-friendly interactive table is printed. Second, when subsetting to a single column using the <code>[]</code> operator, the tibble is not coerced down to a vector unlike for data frames.</p>
+</blockquote>
+<ol start="5" type="1">
+<li>Rewrite the following nested function call using <code>BaseR</code>’s chaining operator:</li>
+</ol>
+<blockquote class="blockquote">
+<p><code>arrange(filter(select(as_tibble(iris), starts_with("Petal"), Species), Petal.Length &lt; 1.55), Species)</code></p>
+</blockquote>
+<blockquote class="blockquote">
+<p><code>iris |&gt;  as_tibble() |&gt;  select(starts_with("Petal"),Species) |&gt;  filter(Petal.Length &lt; 1.55) |&gt;  arrange(Species)</code></p>
+</blockquote>
 
 
 
@@ -278,8 +310,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -390,7 +420,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {

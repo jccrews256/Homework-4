@@ -7,4 +7,32 @@ editor_options:
 ---
 
 
-Answers go here!
+1. If your working directory is `myfolder/homework/`, what *relative* path would you specify to get the file located at `myfolder/MyData.csv`? 
+
+  > The relative path I would specify is `"../MyData.csv"`.
+  
+2. What are the major benefits of using R Projects?
+
+  > R Projects allow us to seamlessly divide our work, as each project has its own working directory, environment, history, folder structure, and source documents. The explicit associationg with a single working directory means we can easily share our work by simply sharing this folder/repo and know the project code should work as long as we have utilized relative file paths. This aspect of R Projects makes them logical tools when utilizing Github repositories for storage and collaboration. 
+
+3. What is Git and what is GitHub?
+
+  > Git is a version control software that helps track changes to files across time and allows multiple users to collobrate on the same project. 
+  Github is a hosting service that allows us to do Git-based projects on the internet and share them with the world virtually. 
+  
+4. What are the two main differences between a `tibble` and a `data.frame`? 
+
+  > First, their printing is more elegant and informative, including the data type of each variable, not printing past the first ten rows, and indicating the total number of columns. Within the Quarto file, a user-friendly interactive table is printed. 
+  Second, when subsetting to a single column using the `[]` operator, the tibble is not coerced down to a vector unlike for data frames. 
+  
+5. Rewrite the following nested function call using `BaseR`'s chaining operator:
+
+  > `arrange(filter(select(as_tibble(iris), starts_with("Petal"), Species), Petal.Length <
+        1.55), Species)`
+        
+  > `iris |> 
+        as_tibble() |> 
+        select(starts_with("Petal"),Species) |> 
+        filter(Petal.Length < 1.55) |> 
+        arrange(Species)`
+        

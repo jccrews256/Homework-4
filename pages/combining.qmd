@@ -6,4 +6,128 @@ editor_options:
   chunk_output_type: inline
 ---
 
-Answers go here!
+```{r}
+library(tidyverse)
+library(readxl)
+library(readr)
+```
+
+
+For this task, we will manipulate and combine two wine datasets. 
+
+### 1. 
+First, I will read in the first sheet of the file, which I have downloaded locally. 
+
+```{r}
+#Reading in the data
+white_wine_tbl<-read_excel("../white-wine.xlsx", sheet=excel_sheets("../white-wine.xlsx")[1])
+
+#Printing new tibble
+white_wine_tbl
+```
+
+
+### 2. 
+Next, we will grab the clean variable names in the second sheet of the file and replace our original tibble column names with those. 
+```{r}
+white_wine_colnames<-read_excel("../white-wine.xlsx", sheet=excel_sheets("../white-wine.xlsx")[2])
+
+colnames(white_wine_tbl)<-white_wine_colnames$Variables
+```
+
+
+### 3. 
+Before moving to the red wine dataset, we will add a variable indicating that these wines are all white wines. 
+
+```{r}
+#Adding new variable indicating these are white wines
+white_wine_tbl$type="white"
+
+#Printing updated tibble
+white_wine_tbl
+```
+
+
+### 4. 
+
+Next, we will repeat this process for the red wine dataset, with the slight caveat that this file is semi-colon-delimited.
+
+```{r}
+#Reading in red wine data
+red_wine_tbl<-read_delim("https://www4.stat.ncsu.edu/~online/datasets/red-wine.csv",delim=";")
+
+#Printing data to check that it read in correctly
+red_wine_tbl
+
+#Assigning clean column names
+colnames(red_wine_tbl)<-white_wine_colnames$Variables
+
+#Adding new variable indicating these are red wines
+red_wine_tbl$type="red"
+
+#Printing data to check that variable names and type indicator are correct
+red_wine_tbl
+```
+
+### 5.
+
+Next, we will bind the two wine tibbles.
+
+```{r}
+#Binding wine datasets
+wine_tbl<-bind_rows(red_wine_tbl,white_wine_tbl)
+```
+
+
+### 6.
+
+Next, we will subset the data to only those of high quality (`quality > 6.5`) with a reasonable alcohol value (`alcohol < 132`).
+
+```{r}
+#Filtering out low-quality wines as well as those with unreasonable alcohol values
+wine_tbl |>
+  filter(quality > 6.5, alcohol < 132)
+```
+
+### 7.
+
+We will continue our data manipulation by sorting the data from highest to lowest quality.
+
+```{r}
+#Filtering out low-quality wines as well as those with unreasonable alcohol values,
+#then sorting from highest to lowest quality
+wine_tbl |>
+  filter(quality > 6.5, alcohol < 132) |>
+  arrange(desc(quality))
+```
+
+### 8.
+
+Still continuing our data manipulation, we will subset to only the variables containing "acid", the `alcohol` variable, the `type` variable, and the `quality` variable. 
+
+```{r}
+#Filtering out low-quality wines as well as those with unreasonable alcohol values,
+#then sorting from highest to lowest quality, then subsetting variables
+wine_tbl |>
+  filter(quality > 6.5, alcohol < 132) |>
+  arrange(desc(quality)) |>
+  select(contains("acid"), alcohol, type, quality)
+```
+
+
+### 9.
+
+For our final data manipulation step, we will add the mean and standard deviation of `alcohol` for each unique value of `quality`. 
+
+```{r}
+#Filtering out low-quality wines as well as those with unreasonable alcohol values,
+#then sorting from highest to lowest quality, then subsetting variables,
+#then calculating quality-specific means and standard deviations of alcohol
+wine_tbl |>
+  filter(quality > 6.5, alcohol < 132) |>
+  arrange(desc(quality)) |>
+  select(contains("acid"), alcohol, type, quality) |>
+  group_by(quality) |>
+  mutate(alcohol_mean=mean(alcohol),
+         alcohol_sd=sd(alcohol))
+```
