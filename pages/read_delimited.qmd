@@ -12,6 +12,7 @@ First, we need to add in our packages.
 
 ```{r}
 library(tidyverse)
+library(DT)
 ```
 
 # Glass Data
@@ -22,10 +23,11 @@ We will read in and manipulate some data on glass type and other characteristics
 First, we will read in the file using `read_csv` as this is a comma-delimited file. 
 ```{r}
 #Reading in the data
-glass_tbl<-read_csv("https://www4.stat.ncsu.edu/online/datasets/glass.data",col_names=c("Id","RI","Na","Mg","Al","Si","K","Ca","Ba","Fe","Type_of_glass"))
+glass_tbl<-read_csv("https://www4.stat.ncsu.edu/online/datasets/glass.data",
+                    col_names=c("Id","RI","Na","Mg","Al","Si","K","Ca","Ba","Fe","Type_of_glass"))
 
 #Printing result
-print(glass_tbl,n=30)
+datatable(glass_tbl)
 ```
 
 
@@ -42,7 +44,7 @@ glass_tbl |>
                               ifelse(Type_of_glass==5,"containers",
                                 ifelse(Type_of_glass==6,"tableware",
                                   ifelse(Type_of_glass==7,"headlamps","error")))))))) |>
-  print(n=30)
+  datatable()
 ```
 
 ### 3. 
@@ -60,7 +62,7 @@ glass_tbl |>
                                 ifelse(Type_of_glass==6,"tableware",
                                   ifelse(Type_of_glass==7,"headlamps","error")))))))) |>
   filter(Fe< 0.2, Type_of_glass %in% c("tableware","headlamps")) |>
-  print(n=30)
+  datatable()
 ```
 
 
@@ -80,7 +82,7 @@ yeast_tbl<-read_fwf("https://www4.stat.ncsu.edu/online/datasets/yeast.data",
                                col_names=c("seq_name","mcg","gvh","alm","mit","erl","pox","vac","nuc","class")))
 
 #Printing resultant tibble
-print(yeast_tbl,n=30)
+datatable(yeast_tbl)
 ```
 
 ### 2. 
@@ -91,7 +93,7 @@ Next, we will create a chain that removes the seq_name and nuc variables.
 #Removing seq_name and nuc
 yeast_tbl |> 
   select(-seq_name,-nuc) |>
-  print(n=30)
+  datatable()
 ```
 
 ### 3.
@@ -105,6 +107,6 @@ yeast_tbl |>
   select(-seq_name,-nuc) |>
   group_by(class) |>
   mutate(across(where(is.numeric),list(mean=mean,median=median),.names="{.fn}_{.col}")) |>
-  print(n=30)
+  datatable()
 ```
 

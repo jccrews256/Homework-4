@@ -14,6 +14,7 @@ First, we need to load our packages.
 library(tidyverse)
 library(readxl)
 library(readr)
+library(DT)
 ```
 
 ### 1. 
@@ -24,7 +25,7 @@ Let's  read in the first sheet of the file, which I have downloaded locally.
 white_wine_tbl<-read_excel("../white-wine.xlsx", sheet=excel_sheets("../white-wine.xlsx")[1])
 
 #Printing new tibble
-print(white_wine_tbl,n=30)
+datatable(white_wine_tbl)
 ```
 
 
@@ -48,7 +49,7 @@ Before moving to the red wine dataset, we will add a variable indicating that th
 white_wine_tbl$type="white"
 
 #Printing updated tibble
-print(white_wine_tbl,n=30)
+datatable(white_wine_tbl)
 ```
 
 
@@ -61,7 +62,7 @@ Next, we will repeat this process for the red wine dataset, with the slight cave
 red_wine_tbl<-read_delim("https://www4.stat.ncsu.edu/~online/datasets/red-wine.csv",delim=";")
 
 #Printing data to check that it read in correctly
-print(red_wine_tbl,n=30)
+datatable(red_wine_tbl)
 
 #Assigning clean column names
 colnames(red_wine_tbl)<-white_wine_colnames$Variables
@@ -70,7 +71,7 @@ colnames(red_wine_tbl)<-white_wine_colnames$Variables
 red_wine_tbl$type="red"
 
 #Printing data to check that variable names and type indicator are correct
-print(red_wine_tbl,n=30)
+datatable(red_wine_tbl)
 ```
 
 ### 5.
@@ -80,6 +81,9 @@ Next, we will bind the two wine tibbles. To demonstrate the code was successful,
 ```{r}
 #Binding wine datasets
 wine_tbl<-bind_rows(red_wine_tbl,white_wine_tbl)
+
+#Printing new tibble
+datatable(wine_tbl)
 ```
 
 
@@ -91,7 +95,7 @@ Next, we will subset the data to only those of high quality (`quality > 6.5`) wi
 #Filtering out low-quality wines as well as those with unreasonable alcohol values
 wine_tbl |>
   filter(quality > 6.5, alcohol < 132) |>
-  print(n=30)
+  datatable()
 ```
 
 ### 7.
@@ -104,7 +108,7 @@ We will continue our data manipulation by sorting the data from highest to lowes
 wine_tbl |>
   filter(quality > 6.5, alcohol < 132) |>
   arrange(desc(quality)) |>
-  print(n=30)
+  datatable()
 ```
 
 ### 8.
@@ -118,7 +122,7 @@ wine_tbl |>
   filter(quality > 6.5, alcohol < 132) |>
   arrange(desc(quality)) |>
   select(contains("acid"), alcohol, type, quality) |>
-  print(n=30)
+  datatable()
 ```
 
 
@@ -137,5 +141,5 @@ wine_tbl |>
   group_by(quality) |>
   mutate(alcohol_mean=mean(alcohol),
          alcohol_sd=sd(alcohol)) |>
-  print(n=30)
+  datatable()
 ```

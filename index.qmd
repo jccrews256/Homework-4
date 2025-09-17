@@ -10,6 +10,6 @@ Dear grader,
 
 Prepare to have some fun reviewing Tidyverse code and outputs!
 
-Note that each time I print a dataset, I print the first 30 rows so it is more clear my code worked. 
+Note that each time I print a dataset, I use the `datatable()` function from the `DT` package. This is because the datasets are large with many variables. 
 
 Cass Crews
